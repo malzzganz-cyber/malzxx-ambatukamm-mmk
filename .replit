@@ -1,0 +1,49 @@
+modules = ["nodejs-24"]
+
+[deployment]
+router = "application"
+deploymentTarget = "autoscale"
+
+[deployment.postBuild]
+args = ["pnpm", "store", "prune"]
+env = { "CI" = "true" }
+
+[workflows]
+runButton = "Project"
+
+[agent]
+stack = "PNPM_WORKSPACE"
+expertMode = true
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 20000
+
+[[ports]]
+localPort = 8080
+externalPort = 8080
+
+[[ports]]
+localPort = 8081
+externalPort = 80
+
+[[ports]]
+localPort = 8082
+externalPort = 3002
+
+[[ports]]
+localPort = 23206
+externalPort = 3000
+
+[userenv]
+
+[userenv.shared]
+FIREBASE_PROJECT_ID = "malzz-ganteng"
+ADMIN_UID = "k7ImnQ5eSwVDVJsL4hTRW9HSyRl1"
+VITE_FIREBASE_API_KEY = "AIzaSyDBB5kp-nNvSbZ6QA7IcfAccTA98Eowryc"
+VITE_FIREBASE_AUTH_DOMAIN = "malzz-ganteng.firebaseapp.com"
+VITE_FIREBASE_PROJECT_ID = "malzz-ganteng"
+VITE_FIREBASE_STORAGE_BUCKET = "malzz-ganteng.firebasestorage.app"
+VITE_FIREBASE_MESSAGING_SENDER_ID = "446160603966"
+VITE_FIREBASE_APP_ID = "1:446160603966:web:5dc9bea1b3439722597a6f"
+VITE_WA_SUPPORT = "6288980873712"
